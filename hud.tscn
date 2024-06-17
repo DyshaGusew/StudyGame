@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7qde6g2qravl"]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_nnbyw"]
+[ext_resource type="FontFile" uid="uid://cynnsqxq1a5sp" path="res://fonts/Xolonium-Regular.ttf" id="2_586yd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1bv5l"]
+line_spacing = 0.0
+font = ExtResource("2_586yd")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_f4cjv"]
+font = ExtResource("2_586yd")
+font_size = 64
+
+[sub_resource type="InputEventAction" id="InputEventAction_icjol"]
+action = &"Enter"
+
+[sub_resource type="Shortcut" id="Shortcut_hmyc1"]
+events = [SubResource("InputEventAction_icjol")]
+
+[sub_resource type="LabelSettings" id="LabelSettings_60vyo"]
+font = ExtResource("2_586yd")
+font_size = 25
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_nnbyw")
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -39.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Моя первая игра!!!"
+label_settings = SubResource("LabelSettings_1bv5l")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_right = 22.5
+offset_bottom = 78.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "0"
+label_settings = SubResource("LabelSettings_f4cjv")
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 190.0
+offset_right = 150.0
+offset_bottom = 296.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/icon_max_width = 2
+theme_override_fonts/font = ExtResource("2_586yd")
+theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_hmyc1")
+text = "Начать"
+icon_alignment = 1
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
+[node name="MaxScoreLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -193.0
+offset_top = 4.0
+offset_right = -15.0
+offset_bottom = 56.0
+grow_horizontal = 0
+text = "Рекорд: 0"
+label_settings = SubResource("LabelSettings_60vyo")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
